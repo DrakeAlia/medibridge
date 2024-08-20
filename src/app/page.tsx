@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardHeader,
@@ -5,136 +7,210 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Pill, Stethoscope, Truck, Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <div className="container mx-auto px-4 py-8">
-        <header className="mb-12 flex justify-between items-center">
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="border-b">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <h1 className="text-5xl font-bold text-blue-600">MediBridge</h1>
-            <p className="text-xl text-gray-600 mt-2">
+            <h1 className="text-3xl font-bold text-primary">MediBridge</h1>
+            <p className="text-sm text-muted-foreground">
               Your Health, Our Priority
             </p>
           </div>
           <nav>
             <ul className="flex space-x-6">
-              <li>
-                <a href="#" className="text-blue-600 hover:text-blue-800">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-blue-600 hover:text-blue-800">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-blue-600 hover:text-blue-800">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-blue-600 hover:text-blue-800">
-                  Contact
-                </a>
-              </li>
+              {["Home", "Services", "About Us", "Contact"].map((item) => (
+                <li key={item}>
+                  <a
+                    href="#"
+                    className="text-foreground hover:text-primary transition-colors"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
-        </header>
+        </div>
+      </header>
 
-        <main>
-          <section className="mb-16">
-            <div className="bg-blue-600 text-white rounded-lg p-8 flex items-center justify-between">
-              <div>
-                <h2 className="text-3xl font-bold mb-4">
-                  Find Your Medication
-                </h2>
-                <p className="mb-4">
-                  Search our extensive database of medications
-                </p>
-              </div>
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search medications..."
-                  className="py-2 px-4 pr-10 rounded-full text-gray-800 w-64"
-                />
-                <Search className="absolute right-3 top-2.5 text-gray-500" />
-              </div>
+      <main>
+        <section className="py-20 px-4 bg-gradient-to-b from-primary/10 to-background">
+          <div className="container mx-auto text-center">
+            <motion.h2
+              className="text-4xl md:text-5xl font-bold mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Welcome to MediBridge
+            </motion.h2>
+            <motion.p
+              className="text-xl mb-8 text-muted-foreground"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Your trusted partner in health and wellness
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <Button className="mr-4">Find a Store</Button>
+              <Button variant="outline">Learn More</Button>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="py-20 px-4">
+          <div className="container mx-auto">
+            <h2 className="text-3xl font-bold mb-12 text-center">
+              Our Services
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Online Prescriptions",
+                  icon: Pill,
+                  description: "Easy and secure prescription services",
+                },
+                {
+                  title: "Health Consultations",
+                  icon: Stethoscope,
+                  description: "Connect with healthcare professionals",
+                },
+                {
+                  title: "Medication Delivery",
+                  icon: Truck,
+                  description: "Fast and reliable delivery to your doorstep",
+                },
+              ].map((service, index) => (
+                <motion.div
+                  key={service.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="h-full transition-shadow hover:shadow-lg">
+                    <CardHeader>
+                      <service.icon className="w-12 h-12 text-primary mb-4" />
+                      <CardTitle className="text-2xl">
+                        {service.title}
+                      </CardTitle>
+                      <CardDescription>{service.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button className="w-full">Learn More</Button>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader>
-                <CardTitle className="text-2xl text-blue-600">
-                  Online Prescriptions
-                </CardTitle>
-                <CardDescription>
-                  Easy and secure prescription services
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4">
-                  Get your prescriptions filled online with our secure and
-                  convenient service.
-                </p>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
+        <section className="py-20 px-4 bg-muted">
+          <div className="container mx-auto">
+            <h2 className="text-3xl font-bold mb-12 text-center">
+              What Our Customers Say
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                {
+                  name: "John Doe",
+                  comment:
+                    "MediBridge has made managing my medications so much easier. Their delivery service is a lifesaver!",
+                },
+                {
+                  name: "Jane Smith",
+                  comment:
+                    "The health consultations are incredibly helpful. I always feel well-informed about my health decisions.",
+                },
+              ].map((testimonial, index) => (
+                <Card key={testimonial.name} className="bg-card">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-5 h-5 fill-primary text-primary"
+                        />
+                      ))}
+                    </div>
+                    <p className="mb-4">{testimonial.comment}</p>
+                    <p className="font-semibold">- {testimonial.name}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader>
-                <CardTitle className="text-2xl text-blue-600">
-                  Health Consultations
-                </CardTitle>
-                <CardDescription>
-                  Connect with healthcare professionals
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4">
-                  Speak with licensed healthcare professionals from the comfort
-                  of your home.
-                </p>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Book Now
-                </Button>
-              </CardContent>
-            </Card>
+        <section className="py-20 px-4 bg-primary text-primary-foreground">
+          <div className="container mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+            <p className="text-xl mb-8">
+              Join MediBridge today and experience healthcare made simple.
+            </p>
+            <Button size="lg" variant="secondary">
+              Sign Up Now
+            </Button>
+          </div>
+        </section>
+      </main>
 
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader>
-                <CardTitle className="text-2xl text-blue-600">
-                  Medication Delivery
-                </CardTitle>
-                <CardDescription>
-                  Fast and reliable delivery to your doorstep
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4">
-                  Have your medications delivered directly to your home with our
-                  reliable service.
-                </p>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Order Now
-                </Button>
-              </CardContent>
-            </Card>
-          </section>
-        </main>
-
-        <footer className="mt-16 border-t pt-8 text-center text-gray-600">
+      <footer className="bg-muted py-12 px-4">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="text-lg font-semibold mb-4">About MediBridge</h3>
+            <p className="text-muted-foreground">
+              Your trusted partner in health and wellness, providing easy access
+              to medications and healthcare services.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              {[
+                "Home",
+                "Services",
+                "About Us",
+                "Contact",
+                "Privacy Policy",
+                "Terms of Service",
+              ].map((item) => (
+                <li key={item}>
+                  <a
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <p className="text-muted-foreground mb-2">
+              123 Health Street, Wellness City
+            </p>
+            <p className="text-muted-foreground mb-2">Phone: (555) 123-4567</p>
+            <p className="text-muted-foreground">Email: info@medibridge.com</p>
+          </div>
+        </div>
+        <div className="container mx-auto mt-8 pt-8 border-t text-center text-muted-foreground">
           <p>&copy; 2024 MediBridge. All rights reserved.</p>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </div>
   );
 }
