@@ -15,30 +15,6 @@ import { motion } from "framer-motion";
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-primary">MediBridge</h1>
-            <p className="text-sm text-muted-foreground">
-              Your Health, Our Priority
-            </p>
-          </div>
-          <nav>
-            <ul className="flex space-x-6">
-              {["Home", "Services", "About Us", "Contact"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-foreground hover:text-primary transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </header>
 
       <main>
         <section className="py-20 px-4 bg-gradient-to-b from-primary/10 to-background">
@@ -49,7 +25,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              Welcome to MediBridge
+             MediBridge
             </motion.h2>
             <motion.p
               className="text-xl mb-8 text-muted-foreground"
